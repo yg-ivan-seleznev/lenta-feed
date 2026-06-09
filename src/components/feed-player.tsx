@@ -2,10 +2,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'preact/hooks';
 import type { IGameFeedItem } from '../types';
 import { getPreloadItems, getSafeIndex } from '../utils/feed';
 import { FeedPage } from './feed-page';
-import { VideoPreloader } from './video-layer';
+import { VideoPreloader, VideoWarmup } from './video-layer';
 
 const SCROLL_SETTLE_MS = 120;
-const PRELOAD_AHEAD = 4;
+const PRELOAD_AHEAD = 12;
 const NEED_MORE_THRESHOLD = 4;
 const PAGE_STACK_GAP_PX = 12;
 const SNAP_ACTIVATION_RATIO = 0.5;
@@ -251,6 +251,7 @@ export function FeedPlayer({
             class="mc-game-feed__player"
             aria-label="Видео ленты"
         >
+            <VideoWarmup items={items} />
             <VideoPreloader items={preloadItems} />
             <div
                 ref={trackRef}

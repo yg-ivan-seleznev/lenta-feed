@@ -2,6 +2,75 @@ import { useEffect, useRef, useState } from 'preact/hooks';
 import type { IGameFeedItem } from '../types';
 import { VideoLoadingIcon } from '../ui/icons';
 
+const warmedVideoSources = new Set<string>();
+const VIDEO_WARMUP_TIMEOUT_MS = 4500;
+const VIDEO_WARMUP_CONCURRENCY = 3;
+
+function waitForWarmVideo(video: HTMLVideoElement): Promise<void> {
+    return new Promise((resolve) => {
+        let timeoutId = 0;
+
+        const cleanup = () => {
+            window.clearTimeout(timeoutId);
+            video.removeEventListener('canplaythrough', cleanup);
+            video.removeEventListener('loadeddata', cleanup);
+            video.removeEventListener('error', cleanup);
+            resolve();
+        };
+
+        timeoutId = window.setTimeout(cleanup, VIDEO_WARMUP_TIMEOUT_MS);
+        video.addEventListener('canplaythrough', cleanup, { once: true });
+        video.addEventListener('loadeddata', cleanup, { once: true });
+        video.addEventListener('error', cleanup, { once: true });
+        video.load();
+    });
+}
+
+async function warmVideoSource(src: string) {
+    if (warmedVideoSources.has(src)) {
+        return;
+    }
+
+    warmedVideoSources.add(src);
+
+    const preloadLink = document.createElement('link');
+
+    preloadLink.rel = 'preload';
+    preloadLink.as = 'video';
+    preloadLink.href = src;
+    preloadLink.type = 'video/mp4';
+    document.head.appendChild(preloadLink);
+
+    const video = document.createElement('video');
+
+    video.src = src;
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    video.style.position = 'fixed';
+    video.style.width = '1px';
+    video.style.height = '1px';
+    video.style.opacity = '0';
+    video.style.pointerEvents = 'none';
+    video.style.transform = 'translate(-9999px, -9999px)';
+    document.body.appendChild(video);
+
+    try {
+        await Promise.allSettled([
+            waitForWarmVideo(video),
+            fetch(src, { cache: 'force-cache' }).then(() => undefined),
+        ]);
+    } catch {
+        // Warmup is a best-effort optimization; playback should still work without it.
+    } finally {
+        video.remove();
+    }
+}
+
+function getUniqueVideoSources(items: IGameFeedItem[]): string[] {
+    return Array.from(new Set(items.map((item) => item.videoSrc)));
+}
+
 export function FeedVideo({
     item,
     isActive,
@@ -152,4 +221,45 @@ export function VideoPreloader({ items }: { items: IGameFeedItem[] }) {
             ))}
         </div>
     );
+}
+
+export function VideoWarmup({ items }: { items: IGameFeedItem[] }) {
+    useEffect(() => {
+        let isCancelled = false;
+        const sources = getUniqueVideoSources(items);
+        let nextIndex = 0;
+
+        const runWorker = async () => {
+            while (!isCancelled && nextIndex < sources.length) {
+                const src = sources[nextIndex];
+
+                nextIndex += 1;
+                await warmVideoSource(src);
+            }
+        };
+
+        const startWarmup = () => {
+            for (let index = 0; index < VIDEO_WARMUP_CONCURRENCY; index += 1) {
+                runWorker();
+            }
+        };
+
+        if ('requestIdleCallback' in window) {
+            const idleId = window.requestIdleCallback(startWarmup, { timeout: 900 });
+
+            return () => {
+                isCancelled = true;
+                window.cancelIdleCallback(idleId);
+            };
+        }
+
+        const timeoutId = window.setTimeout(startWarmup, 300);
+
+        return () => {
+            isCancelled = true;
+            window.clearTimeout(timeoutId);
+        };
+    }, [items]);
+
+    return null;
 }
