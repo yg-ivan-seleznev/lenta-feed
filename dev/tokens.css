@@ -1,0 +1,133 @@
+:root {
+    /* Monochrome */
+    --monochrome-white: #fff;
+    --monochrome-black: #000;
+    
+    /* Gray shades */
+    --grey-50: #f5f5f6;
+    --grey-100: #e6e6e7;
+    --grey-200: #cfcfd2;
+    --grey-300: #aeafb2;
+    --grey-400: #85868b;
+    --grey-500: #6a6b70;
+    --grey-600: #5b5b5f;
+    --grey-700: #4d4d51;
+    --grey-800: #444546;
+    --grey-900: #3b3b3e;
+    --grey-950: #2d2d2f;
+    
+    /* Blue accent colors */
+    --blue-50: #edfaff;
+    --blue-100: #d7f3ff;
+    --blue-200: #b9ebff;
+    --blue-300: #88e1ff;
+    --blue-400: #50cdff;
+    --blue-500: #28b1ff;
+    --blue-600: #0690ff;
+    --blue-700: #0a7beb;
+    --blue-800: #0f62be;
+    --blue-900: #135495;
+    --blue-950: #11345a;
+    
+    /* Purple accent colors (brand) */
+    --blue-medium-50: #eceeff;
+    --blue-medium-100: #dde0ff;
+    --blue-medium-200: #c2c7ff;
+    --blue-medium-300: #9ca1ff;
+    --blue-medium-400: #7b75ff;
+    --blue-medium-500: #6b58ff;
+    --blue-medium-600: #5b36f5;
+    --blue-medium-700: #4e2ad8;
+    --blue-medium-800: #3f25ae;
+    --blue-medium-900: #362689;
+    --blue-medium-950: #221650;
+    
+    /* Цвета статусов */
+    --red-400: #ff6664;
+    --red-500: #ff3533;
+    --red-600: #ed1715;
+    --green-500: #1fc852;
+    --green-600: #14ac42;
+    --green-700: #138235;
+    --yellow-300: #ffe341;
+    --yellow-400: #ffd00d;
+    --yellow-500: #edb200;
+    --orange-400: #ff9c37;
+    --orange-500: #ff8821;
+    --orange-600: #f06306;
+    
+    /* Alpha colors */
+    --white-alpha-01: rgba(255, 255, 255, 0.1);
+    --white-alpha-02: rgba(255, 255, 255, 0.2);
+    --white-alpha-03: rgba(255, 255, 255, 0.3);
+    --white-alpha-05: rgba(255, 255, 255, 0.5);
+    --white-alpha-07: rgba(255, 255, 255, 0.7);
+    --white-alpha-08: rgba(255, 255, 255, 0.8);
+    --black-alpha-01: rgba(0, 0, 0, 0.1);
+    --black-alpha-02: rgba(0, 0, 0, 0.2);
+    --black-alpha-03: rgba(0, 0, 0, 0.3);
+    --black-alpha-05: rgba(0, 0, 0, 0.5);
+    --black-alpha-08: rgba(0, 0, 0, 0.8);
+    
+    /* Семантические токены - Заливки */
+    --fill-accent: #0690ff;
+    --fill-accentBrand: #6b58ff;
+    --fill-accent-hover: #50cdff;
+    --fill-accent-disabled: #d8d8da;
+    --fill-secondary-default: #f0f0f0;
+    --fill-secondary-hover: #e8e8e8;
+    --fill-secondary-disabled: #d8d8da;
+    
+    /* Семантические токены - Текст */
+    --text-primary: #1f1f21;
+    --text-primary-disabled: #929296;
+    --text-secondary-default: #929296;
+    --text-accent: #bcb3ff;
+    --text-accent-hover: #9284ff;
+    --text-inverse: #fff;
+    
+    /* Семантические токены - Иконки */
+    --icon-primary: #1f1f21;
+    --icon-accent: #0690ff;
+    --icon-accent-hover: #50cdff;
+    --icon-inverse: #fff;
+    
+    /* Семантические токены - Границы */
+    --border-selected: #0690ff;
+    
+    /* Семантические токены - Статусы */
+    --fill-error-background: #fff5f5;
+    --text-error: #ed1715;
+    --border-error: #ff6664;
+    
+    /* Семантические токены - Поверхности (тёмная тема) */
+    --surface-elevated: rgba(255, 255, 255, 0.08);
+    --surface-elevated-hover: rgba(255, 255, 255, 0.12);
+    --surface-card: rgba(255, 255, 255, 0.06);
+    --text-on-dark: #ffffff;
+    --text-on-dark-secondary: rgba(255, 255, 255, 0.6);
+    
+    /* Фоны каталога */
+    --color-background: #111;
+    --color-background-dark-purple-gradient: radial-gradient(88% 100% at 11% 0%, rgb(92, 84, 118), rgb(47, 46, 51));
+    --color-project: #5641FF;
+    
+    /* Typography - Font */
+    --basic-font-family: 'YS Text', 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Spacing */
+    --space-s: 12px;
+    --space-m: 16px;
+    --space-xl: 24px;
+    --space-2-xl: 32px;
+    
+    /* Border radius */
+    --border-radius-small: 4px;
+    --border-radius-default: 8px;
+    --border-radius-large: 12px;
+    --border-radius-large-unified: 16px;
+    
+    /* Shadows */
+    --box-shadow-sw-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-sw-default: 0 3px 5px rgba(14, 21, 47, 0.1), 0 1px 12px rgba(14, 21, 47, 0.12);
+}

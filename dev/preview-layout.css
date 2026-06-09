@@ -1,0 +1,99 @@
+.preview-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--space-2-xl) var(--space-xl);
+}
+
+.preview-card {
+    background: var(--surface-elevated);
+    border-radius: var(--border-radius-large-unified);
+    padding: var(--space-2-xl);
+    box-shadow: var(--box-shadow-sw-default);
+}
+
+.preview-header {
+    margin-bottom: var(--space-2-xl);
+    border-bottom: 1px solid var(--white-alpha-01);
+    padding-bottom: var(--space-xl);
+}
+
+.preview-title {
+    margin: 0 0 var(--space-s) 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-on-dark);
+    font-family: var(--basic-font-family);
+}
+
+.preview-description {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text-on-dark-secondary);
+    line-height: 1.5;
+}
+
+.preview-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2-xl);
+}
+
+.preview-error {
+    padding: var(--space-xl);
+    background: var(--fill-error-background);
+    border: 2px solid var(--border-error);
+    border-radius: var(--border-radius-default);
+    text-align: center;
+}
+
+.preview-error__icon {
+    font-size: 48px;
+    margin-bottom: var(--space-s);
+}
+
+.preview-error__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-error);
+    margin-bottom: var(--space-s);
+}
+
+.preview-error__message {
+    font-size: 15px;
+    color: var(--text-error);
+    margin-bottom: var(--space-s);
+    font-family: monospace;
+}
+
+.preview-error__details {
+    text-align: left;
+    background: var(--monochrome-white);
+    padding: var(--space-s);
+    border-radius: var(--border-radius-small);
+    margin-top: var(--space-s);
+}
+
+.preview-error__details summary {
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: var(--space-s);
+}
+
+.preview-error__details pre {
+    margin: 0;
+    font-size: 13px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: var(--grey-800);
+}
+
+.preview-footer {
+    margin-top: var(--space-2-xl);
+    padding: var(--space-s) var(--space-xl);
+    background: var(--surface-card);
+    border-top: 1px solid var(--white-alpha-01);
+    border-radius: var(--border-radius-default);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-on-dark-secondary);
+}
